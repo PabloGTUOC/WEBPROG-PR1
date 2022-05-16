@@ -9,28 +9,64 @@ console.log('Your code starts here 🙂');
 */
 
 //On load of page, clean to start search
-
-import { cleanUpLoad, loadList } from './changer.js';
-
-function initweb() {
-    var app = new cleanUpLoad(document.querySelector('.results'));
-};
-initweb();
-
-/*On load of page, call API to store currency list in the background
-
 import { displayCurrencyList } from './api.js';
+import { cleanUpLoad, loadList, increaselist } from './changer.js';
 
-function initlist() {
+var app = new cleanUpLoad(document.querySelector('.results'));
+var list = new loadList(app.listDom);
+
+/*On load of page, call API to store currency list in the background */
+
+
+async function initlist() {
     var list = new displayCurrencyList();
+    console.info(list);
+    return list.currencies;
 };
 
-initlist();*/
+const currencies = await  initlist();
+
+var searchInput = document.getElementById("search");
+
+searchInput.addEventListener('keyup', function(){
+  
+  var search = this.value;
+    const filtercurrencies = extractCurrenciesFromSearch(search);
+      // Clear the list
+      var app = new cleanUpLoad(document.querySelector('.results'));
+      //Add new list
+      var newList = new loadList(app.listDom);
+
+
+
+    // ESTO ES LO MISMO QUE EL CODIGO DE ABAJO, PERO MAS CUTRE
+
+    // for (let index = 0; index < filtercurrencies.length; index++) {
+    //     const element = filtercurrencies[index];
+    //     app.listDom.getElementsByClassName('currencylist')[0].append(increaselist(element));
+
+        
+    // }
+
+      filtercurrencies.forEach(element => {
+          app.listDom.getElementsByClassName('currencylist')[0].append(increaselist(element));
+      });
+
+  
+});
+
+
+function extractCurrenciesFromSearch(query){
+    return currencies.filter(currency => {
+        return currency.code.toLowerCase().startsWith(query.toLowerCase()) || currency.value.toLowerCase().startsWith(query.toLowerCase()) ;
+    });
+    
+}
 
 //Upload new list
 
 
-function initlist() {
-    var app = new loadList(document.querySelector('.results'));
-};
-initlist();
+// function initlist() {
+//     var app = new loadList(document.querySelector('.results'));
+// };
+// initlist();

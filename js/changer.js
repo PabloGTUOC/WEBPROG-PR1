@@ -1,6 +1,6 @@
 // Cleans the website at load
 
-export { cleanUpLoad, loadList };
+export { cleanUpLoad, loadList, increaselist };
 
 class cleanUpLoad {
     constructor(ref) {
@@ -39,6 +39,7 @@ class loadList {
     }
     init() {
         // Create list elements
+        console.log('        // Create list element1        ');
         let list = [['EUR', 'Euro'], ['DOLL', 'Dollar'], ['YPN', 'Yen']];
         let newList = this.listDom.getElementsByClassName('currencylist__item');
         newList = Array.from(newList);
@@ -53,18 +54,19 @@ class loadList {
 }
 
 
-function increaselist (list) {
+function increaselist ({ code, value }) {
+    console.info({ code, value })
     const newLi = document.createElement("li");
     newLi.className = "currencylist__item";
     const newSpan1 = document.createElement("span");
     newSpan1.className = "currencylist__item-code";
-    newSpan1.append(list[0]);
+    newSpan1.append(code);
     newLi.append(newSpan1);
     const newSpan2 = document.createElement("span");
     newSpan2.className = "currencylist__item-name";
     const newa1 = document.createElement("a");
     newa1.className = "link";
-    newa1.append(list[1]);
+    newa1.append(value);
     newSpan2.append(newa1);
     newLi.append(newSpan2);
     const newSpan3 = document.createElement("span");
