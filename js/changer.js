@@ -1,7 +1,18 @@
 // Cleans the website at load
 
-export { cleanUpLoad, loadList };
+export { cleanUpLoad, loadList, increaselist, updateTitle };
 
+
+/* Define a function to clean the original title */
+function updateTitle (removetitle, newText) {
+    Array.from(removetitle).forEach(item => item.remove());
+    let newTitle = document.createElement("H2");
+    newTitle.classList.add('results-title'); 
+    newTitle.innerHTML = newText;
+    return newTitle;
+}
+
+/* Define a class to clean the original html */
 class cleanUpLoad {
     constructor(ref) {
         this.listDom = ref;
@@ -9,17 +20,9 @@ class cleanUpLoad {
     }
     init() {
         // delete original content on search title and add general statement
-        console.log(this.listDom);
         let removetitle = this.listDom.getElementsByClassName('results-title');
-        console.log(removetitle);
-        Array.from(removetitle).forEach(item => item.remove());
-        let newTitle = document.createElement("H2");
-        newTitle.classList.add('results-title'); 
-        newTitle.innerHTML = 'You are not searching for anything';
-        console.log(newTitle);
+        let newTitle = updateTitle(removetitle, "Please input at least 3 characters for search");
         this.listDom.getElementsByClassName('results__header')[0].appendChild(newTitle);
-
-
         // delete original content on Currency
         let removeitems = this.listDom.getElementsByClassName('currencylist__item');
         removeitems = Array.from(removeitems);
@@ -31,7 +34,7 @@ class cleanUpLoad {
 }
 
 
-
+/* Define a class to load the list as return of a search */
 class loadList {
     constructor(ref) {
         this.listDom = ref;
@@ -39,32 +42,31 @@ class loadList {
     }
     init() {
         // Create list elements
-        let list = [['EUR', 'Euro'], ['DOLL', 'Dollar'], ['YPN', 'Yen']];
+        let list = [];
         let newList = this.listDom.getElementsByClassName('currencylist__item');
         newList = Array.from(newList);
         for (let i = 0; i < list.length;i++) {
-            //console.log(list[i])
             let itemli = increaselist(list[i]);  
             //console.log(itemli);
             newList.push(itemli);
         }
-    console.log(newList);
     }
 }
 
-
-function increaselist (list) {
+/* Function to create a new item li block per currency */
+function increaselist ({ code, value }) {
+    console.info({ code, value })
     const newLi = document.createElement("li");
     newLi.className = "currencylist__item";
     const newSpan1 = document.createElement("span");
     newSpan1.className = "currencylist__item-code";
-    newSpan1.append(list[0]);
+    newSpan1.append(code);
     newLi.append(newSpan1);
     const newSpan2 = document.createElement("span");
     newSpan2.className = "currencylist__item-name";
     const newa1 = document.createElement("a");
     newa1.className = "link";
-    newa1.append(list[1]);
+    newa1.append(value);
     newSpan2.append(newa1);
     newLi.append(newSpan2);
     const newSpan3 = document.createElement("span");

@@ -21,8 +21,8 @@
             <h1 class="title">💶 Exchanges</h1>
             <div class="searchbox">
                 <div class="searchbox__content">
-                    <input class="field field--search js-search-input" type="text" placeholder="Search for currencies...">
-                    <button class="btn btn--search js-clear-btn">Clear&nbsp;Search</button>
+                    <input id="search" class="field field--search js-search-input" type="text" placeholder="Search for currencies...">
+                    <button id="cleanB" class="btn btn--search js-clear-btn">Clear&nbsp;Search</button>
                     <svg class="field-icon" xmlns="http://www.w3.org/2000/svg" class="ionicon" viewBox="0 0 512 512"><title>Search</title><path d="M221.09 64a157.09 157.09 0 10157.09 157.09A157.1 157.1 0 00221.09 64z" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="32" d="M338.29 338.29L448 448"/></svg>
                 </div>
                 <p class="searchbox__feedback js-search-feedback">&nbsp;</p>
@@ -38,11 +38,9 @@
         </div>
 
         <article class="results">
-
             <header class="results__header">
-                <h2 class="results-title">3 currencies found.</h2>
+                <h2  class="results-title">3 currencies found.</h2>
             </header>
-
             <div class="results__content">
                 <ul class="currencylist">
 
