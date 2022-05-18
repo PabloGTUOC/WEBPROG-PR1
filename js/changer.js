@@ -1,6 +1,6 @@
 // Cleans the website at load
 
-export { cleanUpLoad, loadList, increaselist, updateTitle };
+export { cleanUpLoad, loadList, increaselist, updateTitle, unHideDetails };
 
 
 /* Define a function to clean the original title */
@@ -64,6 +64,10 @@ function increaselist ({ code, value }) {
     newLi.append(newSpan1);
     const newSpan2 = document.createElement("span");
     newSpan2.className = "currencylist__item-name";
+    newSpan2.addEventListener('click', function(){
+            let checkDetails = true;
+            return checkDetails;
+    });
     const newa1 = document.createElement("a");
     newa1.className = "link";
     newa1.append(value);
@@ -84,4 +88,19 @@ function increaselist ({ code, value }) {
     newLi.append(newSpan3)
     console.log(newLi);
     return newLi;
+}
+
+/* Define a class to unhide the details selection of a search */
+class unHideDetails {
+    constructor(ref) {
+        this.listDom = ref;
+        this.init();
+    }
+    init() {
+        // Unhide the article details
+        let unhidesection = this.listDom.getElementsByClassName('currencydetail');
+        console.log(unhidesection);
+        console.log(unhidesection[0]);
+        unhidesection[0].style.setProperty("transform", 0);
+    }
 }

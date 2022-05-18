@@ -9,20 +9,20 @@ console.log('Your code starts here 🙂');
 */
 
 /* General variable to introduce results domain */
-
+let checkDetails = false;
 let resultdomin = document.querySelector('.results');
 
 //On load of page, clean to start search
 import { displayCurrencyList } from './api.js';
-import { cleanUpLoad, loadList, increaselist, updateTitle } from './changer.js';
+import { cleanUpLoad, loadList, increaselist, updateTitle, unHideDetails } from './changer.js';
 
-var app = new cleanUpLoad(resultdomin);
-var list = new loadList(app.listDom);
+let app = new cleanUpLoad(resultdomin);
+let list = new loadList(app.listDom);
 
 /*On load of page, call API to store currency list in the background */
 
 async function initlist() {
-    var list = new displayCurrencyList();
+    let list = new displayCurrencyList();
     console.info(list);
     return list.currencies;
 };
@@ -57,14 +57,19 @@ function extractCurrenciesFromSearch(query){
             return currency.code.toLowerCase().startsWith(query.toLowerCase()) || currency.value.toLowerCase().startsWith(query.toLowerCase()) ;
         });      
     }
-}
+};
 
 /*Clean the results after typing a search */
-var cleanSearch = document.getElementById("cleanB");
-
+let cleanSearch = document.getElementById("cleanB");
 cleanSearch.addEventListener('click', function(){
       // Clear the list
-      var app = new cleanUpLoad(resultdomin);
+      let app = new cleanUpLoad(resultdomin);
       // Clear the input box
       searchInput.value = "";
 });
+
+
+
+if (checkDetails) {
+    let showDetails = new unHideDetails(resultdomin);
+}
