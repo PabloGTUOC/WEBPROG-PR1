@@ -3,6 +3,8 @@
 export { cleanUpLoad, loadList, increaselist, updateTitle, unHideDetails };
 
 
+let resultdomin = document.querySelector('.results');
+
 /* Define a function to clean the original title */
 function updateTitle (removetitle, newText) {
     Array.from(removetitle).forEach(item => item.remove());
@@ -63,8 +65,11 @@ function increaselist ({ code, value }) {
     const newSpan2 = document.createElement("span");
     newSpan2.className = "currencylist__item-name";
     newSpan2.addEventListener('click', function(){
-            let clickDetails = this.value;
-            return clickDetails;
+        console.log('idiot');
+        let unhidesection = document.getElementById("currencydetail");
+        console.log(unhidesection);
+        console.log(unhidesection[0]);
+        unhidesection.style.transform = "translateX(0)";
     });
     const newa1 = document.createElement("a");
     newa1.className = "link";
@@ -98,6 +103,6 @@ class unHideDetails {
         let unhidesection = this.listDom.getElementsByClassName('currencydetail');
         console.log(unhidesection);
         console.log(unhidesection[0]);
-        unhidesection[0].style.setProperty("transform", 0);
+        unhidesection[0].style.setProperty(transform, 0);
     }
 }

@@ -32,6 +32,8 @@ async function initDetails() {
 };
 
 const currencies = await initlist();
+let currencyValues = Object.values(currencies);
+console.log(currencyValues);
 
 /*Once list is load, allow for search on the main site and update title of results */
 var searchInput = document.getElementById("search");
