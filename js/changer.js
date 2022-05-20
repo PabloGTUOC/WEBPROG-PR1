@@ -1,7 +1,7 @@
 // Cleans the website at load
 
 export { cleanUpLoad, loadList, increaselist, updateTitle, unHideDetails };
-
+import { displayCurrencyList, displayCurrencyDetails } from './api.js';
 
 let resultdomin = document.querySelector('.results');
 
@@ -69,7 +69,8 @@ function increaselist ({ code, value }) {
         let unhidesection = document.getElementById("currencydetail");
         unhidesection.style.transform = "translateX(0)";
         let clickValue = value;
-        console.log(clickValue);
+        clickDetails = new displayCurrencyDetails(clickValue);
+        console.log(clickDetails);
     });
     const newa1 = document.createElement("a");
     newa1.className = "link";
