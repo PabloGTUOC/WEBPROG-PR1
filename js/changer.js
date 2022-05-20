@@ -63,7 +63,7 @@ function increaselist ({ code, value }) {
     const newSpan2 = document.createElement("span");
     newSpan2.className = "currencylist__item-name";
     newSpan2.addEventListener('click', function(){
-            let clickDetails = code;
+            let clickDetails = value;
             return clickDetails;
     });
     const newa1 = document.createElement("a");
