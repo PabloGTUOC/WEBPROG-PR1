@@ -11,7 +11,7 @@ console.log('Your code starts here 🙂');
 /* General variable to introduce results domain */
 
 let resultdomin = document.querySelector('.results');
-
+let removetitle = document.getElementsByClassName('results-title');
 //On load of page, clean to start search
 import { displayCurrencyList, displayCurrencyDetails } from './api.js';
 import { cleanUpLoad, loadList, increaselist, updateTitle, unHideDetails } from './changer.js';
