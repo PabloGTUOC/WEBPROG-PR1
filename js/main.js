@@ -47,7 +47,7 @@ searchInput.addEventListener('keyup', function(){
     });
 });
 
-//const currencieDetails = await initDetails(clickDetails);
+const currencieDetails = await initDetails(clickDetails);
 
 
 if (app.listDom.getElementsByClassName('currencylist')[0]) {
