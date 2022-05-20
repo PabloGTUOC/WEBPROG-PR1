@@ -38,17 +38,16 @@ var searchInput = document.getElementById("search");
 searchInput.addEventListener('keyup', function(){
   var search = this.value;
     const filtercurrencies = extractCurrenciesFromSearch(search);
-    let filterArray = Array.from(filtercurrencies);
       // Clear the list
       var app = new cleanUpLoad(resultdomin);
       //Add new list
       var newList = new loadList(app.listDom);
-      filterArray.forEach(element => {
+      filtercurrencies.forEach(element => {
         app.listDom.getElementsByClassName('currencylist')[0].append(increaselist(element));
     });
 });
 
-const currencieDetails = await initDetails(clickDetails);
+//const currencieDetails = await initDetails(clickDetails);
 
 
 if (app.listDom.getElementsByClassName('currencylist')[0]) {
