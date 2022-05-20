@@ -45,18 +45,18 @@ searchInput.addEventListener('keyup', function(){
     filtercurrencies.forEach(element => {
         app.listDom.getElementsByClassName('currencylist')[0].append(increaselist(element));
     });
-
-});
-
-    /*if (app.listDom.getElementsByClassName('currencylist')[0].length > 0) {
+    if (app.listDom.getElementsByClassName('currencylist')[0].length > 0) {
         let newT = updateTitle(removetitle, "You can click for further details");
         resultdomin.getElementsByClassName('results__header')[0].appendChild(newT);
     } else {
         let newT = updateTitle(removetitle, "There is no matching results");
         resultdomin.getElementsByClassName('results__header')[0].appendChild(newT);
-    }*/
+    }
+});
 
-const currencieDetails = await initDetails(clickDetails);
+
+
+//const currencieDetails = await initDetails(clickDetails);
 
 
 function extractCurrenciesFromSearch(query){
