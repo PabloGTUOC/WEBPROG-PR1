@@ -26,7 +26,6 @@ class cleanUpLoad {
         // delete original content on Currency
         let removeitems = this.listDom.getElementsByClassName('currencylist__item');
         removeitems = Array.from(removeitems);
-        console.log(removeitems);
         for (let i = 1; i < removeitems.length;i++) {
                 removeitems[i].remove();  
         }
@@ -55,7 +54,6 @@ class loadList {
 
 /* Function to create a new item li block per currency */
 function increaselist ({ code, value }) {
-    console.info({ code, value })
     const newLi = document.createElement("li");
     newLi.className = "currencylist__item";
     const newSpan1 = document.createElement("span");
@@ -65,8 +63,8 @@ function increaselist ({ code, value }) {
     const newSpan2 = document.createElement("span");
     newSpan2.className = "currencylist__item-name";
     newSpan2.addEventListener('click', function(){
-            let checkDetails = true;
-            return checkDetails;
+            let clickDetails = code;
+            return clickDetails;
     });
     const newa1 = document.createElement("a");
     newa1.className = "link";
@@ -86,7 +84,6 @@ function increaselist ({ code, value }) {
     newa2.append(newSpan4);
     newSpan3.append(newa2);
     newLi.append(newSpan3)
-    console.log(newLi);
     return newLi;
 }
 

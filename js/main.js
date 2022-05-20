@@ -9,11 +9,11 @@ console.log('Your code starts here 🙂');
 */
 
 /* General variable to introduce results domain */
-let checkDetails = false;
+
 let resultdomin = document.querySelector('.results');
 
 //On load of page, clean to start search
-import { displayCurrencyList } from './api.js';
+import { displayCurrencyList, displayCurrencyDetails } from './api.js';
 import { cleanUpLoad, loadList, increaselist, updateTitle, unHideDetails } from './changer.js';
 
 let app = new cleanUpLoad(resultdomin);
@@ -23,44 +23,54 @@ let list = new loadList(app.listDom);
 
 async function initlist() {
     let list = new displayCurrencyList();
-    console.info(list);
     return list.currencies;
 };
-const currencies = await  initlist();
+
+async function initDetails() {
+    let details = new displayCurrencyDetails();
+    return details.currencieDetails;
+};
+
+const currencies = await initlist();
 
 /*Once list is load, allow for search on the main site and update title of results */
 var searchInput = document.getElementById("search");
-
 searchInput.addEventListener('keyup', function(){
   var search = this.value;
     const filtercurrencies = extractCurrenciesFromSearch(search);
+    let filterArray = Array.from(filtercurrencies);
       // Clear the list
       var app = new cleanUpLoad(resultdomin);
       //Add new list
       var newList = new loadList(app.listDom);
-      filtercurrencies.forEach(element => {
-          app.listDom.getElementsByClassName('currencylist')[0].append(increaselist(element));
-      });
-    let removetitle = resultdomin.getElementsByClassName('results-title');
-    if (filtercurrencies.length > 0) {
-        let newT = updateTitle(removetitle, "You can click for further details");
-        resultdomin.getElementsByClassName('results__header')[0].appendChild(newT);
-    } else {
-        let newT = updateTitle(removetitle, "There is no matching results");
-        resultdomin.getElementsByClassName('results__header')[0].appendChild(newT);
-    }
+      filterArray.forEach(element => {
+        app.listDom.getElementsByClassName('currencylist')[0].append(increaselist(element));
+    });
 });
+
+const currencieDetails = await initDetails(clickDetails);
+
+
+if (app.listDom.getElementsByClassName('currencylist')[0]) {
+    let newT = updateTitle(removetitle, "You can click for further details");
+    resultdomin.getElementsByClassName('results__header')[0].appendChild(newT);
+} else {
+    let newT = updateTitle(removetitle, "There is no matching results");
+    resultdomin.getElementsByClassName('results__header')[0].appendChild(newT);
+}
+
 
 function extractCurrenciesFromSearch(query){
     if (query.length > 2) {
         return currencies.filter(currency => {
-            return currency.code.toLowerCase().startsWith(query.toLowerCase()) || currency.value.toLowerCase().startsWith(query.toLowerCase()) ;
+            return currency.code.toLowerCase().includes(query.toLowerCase()) || currency.value.toLowerCase().includes(query.toLowerCase()) ;
         });      
     }
 };
 
 /*Clean the results after typing a search */
 let cleanSearch = document.getElementById("cleanB");
+console.log(cleanSearch);
 cleanSearch.addEventListener('click', function(){
       // Clear the list
       let app = new cleanUpLoad(resultdomin);
@@ -68,8 +78,6 @@ cleanSearch.addEventListener('click', function(){
       searchInput.value = "";
 });
 
-
-
-if (checkDetails) {
+if (currencieDetails) {
     let showDetails = new unHideDetails(resultdomin);
 }
