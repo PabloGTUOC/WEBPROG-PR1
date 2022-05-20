@@ -67,9 +67,9 @@ function increaselist ({ code, value }) {
     newSpan2.addEventListener('click', function(){
         console.log('idiot');
         let unhidesection = document.getElementById("currencydetail");
-        console.log(unhidesection);
-        console.log(unhidesection[0]);
         unhidesection.style.transform = "translateX(0)";
+        let clickValue = value;
+        console.log(clickValue);
     });
     const newa1 = document.createElement("a");
     newa1.className = "link";
