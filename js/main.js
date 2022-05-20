@@ -35,29 +35,53 @@ const currencies = await initlist();
 
 /*Once list is load, allow for search on the main site and update title of results */
 var searchInput = document.getElementById("search");
-searchInput.addEventListener('keyup', function(){
+/*searchInput.addEventListener('keyup', function(){
   var search = this.value;
     const filtercurrencies = extractCurrenciesFromSearch(search);
     // Clear the list
     var app = new cleanUpLoad(resultdomin);
     //Add new list
     var newList = new loadList(app.listDom);
-    filtercurrencies.forEach(element => {
+    /*filtercurrencies.forEach(element => {
         app.listDom.getElementsByClassName('currencylist')[0].append(increaselist(element));
     });
-    if (app.listDom.getElementsByClassName('currencylist')[0].length > 0) {
+    let eachList = filtercurrencies.forEach(element => {
+        app.listDom.getElementsByClassName('currencylist')[0].append(increaselist(element));
+    });
+    if (eachList.length > 0) {
         let newT = updateTitle(removetitle, "You can click for further details");
         resultdomin.getElementsByClassName('results__header')[0].appendChild(newT);
     } else {
         let newT = updateTitle(removetitle, "There is no matching results");
         resultdomin.getElementsByClassName('results__header')[0].appendChild(newT);
     }
-});
+    return eachList
+});*/
 
+let eachListResult = searchInput.addEventListener('keyup', function(){
+    var search = this.value;
+      const filtercurrencies = extractCurrenciesFromSearch(search);
+      // Clear the list
+      var app = new cleanUpLoad(resultdomin);
+      //Add new list
+      var newList = new loadList(app.listDom);
+      /*filtercurrencies.forEach(element => {
+          app.listDom.getElementsByClassName('currencylist')[0].append(increaselist(element));
+      });*/
+      let eachList = filtercurrencies.forEach(element => {
+          app.listDom.getElementsByClassName('currencylist')[0].append(increaselist(element));
+      });
+      if (eachList.length > 0) {
+          let newT = updateTitle(removetitle, "You can click for further details");
+          resultdomin.getElementsByClassName('results__header')[0].appendChild(newT);
+      } else {
+          let newT = updateTitle(removetitle, "There is no matching results");
+          resultdomin.getElementsByClassName('results__header')[0].appendChild(newT);
+      }
+      return eachList
+  });
 
-
-//const currencieDetails = await initDetails(clickDetails);
-
+console.log(eachListResult.eachList);
 
 function extractCurrenciesFromSearch(query){
     if (query.length > 2) {
@@ -77,6 +101,10 @@ cleanSearch.addEventListener('click', function(){
       searchInput.value = "";
 });
 
+
+/*Call the API for details on the clicked code */
+//const currencieDetails = await initDetails(clickDetails);
+
 if (currencieDetails) {
     let showDetails = new unHideDetails(resultdomin);
-}
+};
