@@ -1,6 +1,6 @@
 // Cleans the website at load
 
-export { cleanUpLoad, loadList, increaselist, updateTitle, unHideDetails };
+export { cleanUpLoad, loadList, increaselist, updateTitle, unHideDetails, updateDetails };
 import { displayCurrencyList, displayCurrencyDetails } from './api.js';
 
 let resultdomin = document.querySelector('.results');
@@ -12,6 +12,22 @@ function updateTitle (removetitle, newText) {
     newTitle.classList.add('results-title'); 
     newTitle.innerHTML = newText;
     return newTitle;
+}
+
+/* Define a function to clean the original title */
+function updateDetails ({code, value, dateValue, adaValue}) {
+    let currencyCodeHTML = document.getElementsByClassName('js-currencydetail-code')[0];
+    let currencyNameHTML = document.getElementsByClassName('js-currencydetail-name')[0];
+    let currencyDateHTML = document.getElementsByClassName('js-currencydetail-date')[0];
+    let currencyAdaHTML = document.getElementsByClassName('currencydetail__datasheet-data')[0];    
+
+    currencyCodeHTML.innerHTML = code;
+    currencyNameHTML.innerHTML = value;
+    currencyDateHTML.value = dateValue;
+    currencyAdaHTML.innerHTML = adaValue;
+
+
+    
 }
 
 /* Define a class to clean the original html */
@@ -33,6 +49,8 @@ class cleanUpLoad {
         }
     }
 }
+
+
 
 
 /* Define a class to load the list as return of a search */
@@ -62,19 +80,26 @@ function increaselist ({ code, value }) {
     newSpan1.className = "currencylist__item-code";
     newSpan1.append(code);
     newLi.append(newSpan1);
+
+
+
     const newSpan2 = document.createElement("span");
     newSpan2.className = "currencylist__item-name";
-    newSpan2.addEventListener('click', function(){
+    
+    const newa1 = document.createElement("a");
+    newa1.className = "link";
+    newa1.append(value);
+    newa1.addEventListener('click', async function(){
         console.log('idiot');
         let unhidesection = document.getElementById("currencydetail");
         unhidesection.style.transform = "translateX(0)";
         let clickValue = value;
-        clickDetails = new displayCurrencyDetails(clickValue);
-        console.log(clickDetails);
+        const clickDetails = new displayCurrencyDetails(clickValue);
+        const details = await clickDetails.loadData(code);
+            updateDetails({code: details[1].code, value: details[1].code, dateValue: details[0].value, adaValue: details[1].value['ada']});
+        console.log(details);
+
     });
-    const newa1 = document.createElement("a");
-    newa1.className = "link";
-    newa1.append(value);
     newSpan2.append(newa1);
     newLi.append(newSpan2);
     const newSpan3 = document.createElement("span");

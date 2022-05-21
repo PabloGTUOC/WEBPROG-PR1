@@ -15,7 +15,6 @@ let removetitle = document.getElementsByClassName('results-title');
 //On load of page, clean to start search
 import { displayCurrencyList, displayCurrencyDetails } from './api.js';
 import { cleanUpLoad, loadList, increaselist, updateTitle, unHideDetails } from './changer.js';
-
 let app = new cleanUpLoad(resultdomin);
 let list = new loadList(app.listDom);
 
@@ -47,10 +46,10 @@ let lookValue = searchInput.addEventListener('keyup', function(){
     /*filtercurrencies.forEach(element => {
         app.listDom.getElementsByClassName('currencylist')[0].append(increaselist(element));
     });*/
-    let eachList = filtercurrencies.forEach(element => {
+    let eachList = filtercurrencies?.forEach(element => {
         app.listDom.getElementsByClassName('currencylist')[0].append(increaselist(element));
     });
-    if (eachList.length > 0) {
+    if (eachList?.length > 0) {
         let newT = updateTitle(removetitle, "You can click for further details");
         resultdomin.getElementsByClassName('results__header')[0].appendChild(newT);
     } else {
@@ -66,7 +65,7 @@ function extractCurrenciesFromSearch(query){
     if (query.length > 2) {
         return currencies.filter(currency => {
             return currency.code.toLowerCase().includes(query.toLowerCase()) || currency.value.toLowerCase().includes(query.toLowerCase()) ;
-        });      
+        });
     }
 };
 
@@ -81,9 +80,21 @@ cleanSearch.addEventListener('click', function(){
 });
 
 
+const  addOncloseClickevent = () => {
+    console.log('Hiding details');
+    let closeLink = document.getElementsByClassName('js-currencydetail-close')[0];
+    closeLink.addEventListener('click', function(){
+        const unhidesection = document.getElementsByClassName('currencydetail')[0];
+        unhidesection.style.transform = "translateX(100%)";
+
+  });
+};
+
+addOncloseClickevent();
+
 /*Call the API for details on the clicked code */
 //const currencieDetails = await initDetails(clickDetails);
 
-if (currencieDetails) {
-    let showDetails = new unHideDetails(resultdomin);
-};
+// if (currencieDetails) {
+//     let showDetails = new unHideDetails(resultdomin);
+// };

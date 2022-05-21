@@ -27,11 +27,18 @@ class displayCurrencyDetails {
   currencieDetails = [];
   constructor(code) {
     this.code = code;
-    this.currencieDetails = this.init();
+
   }
-  async init() {
+
+  loadData = async function (code) {
     let url = 'https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/';
-    url = url + `${this.code}` + '.json';
+    let transformCode = code.toLowerCase();;
+    if (code.indexOf(' ') >= 0) {
+      transformCode = code.split(' ')?.[1];
+    }
+    url = `${url}/${transformCode}.json`;
+
+    console.log(url);
     let response = await fetch(url);
     if (response.ok){
       const jsonResponse =  await response.json();
@@ -42,4 +49,6 @@ class displayCurrencyDetails {
       return data;
     }
   }
+
+   
 };
