@@ -17,9 +17,9 @@ import { displayCurrencyList, displayCurrencyDetails } from './api.js';
 import { cleanUpLoad, loadList, increaselist, updateTitle, unHideDetails } from './changer.js';
 let app = new cleanUpLoad(resultdomin);
 let list = new loadList(app.listDom);
+let favs = [];
 
 /*On load of page, call API to store currency list in the background */
-
 async function initlist() {
     let list = new displayCurrencyList();
     return list.currencies;
@@ -80,13 +80,11 @@ cleanSearch.addEventListener('click', function(){
 });
 
 
-const  addOncloseClickevent = () => {
-    console.log('Hiding details');
+const  addOncloseClickeventDetails = () => {
     let closeLink = document.getElementsByClassName('js-currencydetail-close')[0];
     closeLink.addEventListener('click', function(){
         const unhidesection = document.getElementsByClassName('currencydetail')[0];
         unhidesection.style.transform = "translateX(100%)";
-
   });
 };
 
@@ -99,8 +97,18 @@ const  addOnshowFavs = () => {
   });
 };
 
-addOncloseClickevent();
+const  addOncloseClickeventFavs = () => {
+    let closeLinkfavs = document.getElementsByClassName('js-favs-close')[0];
+    closeLinkfavs.addEventListener('click', function(){
+        const favssection = document.getElementsByClassName('favs')[0];
+        favssection.style.transform = "translateX(100%)";
+  });
+};
+
 addOnshowFavs ();
+addOncloseClickeventDetails();
+addOncloseClickeventFavs ();
+
 
 
 /*Call the API for details on the clicked code */
