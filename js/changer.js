@@ -19,11 +19,13 @@ function updateDetails ({code, value, dateValue, adaValue}) {
     let currencyCodeHTML = document.getElementsByClassName('js-currencydetail-code')[0];
     let currencyNameHTML = document.getElementsByClassName('js-currencydetail-name')[0];
     let currencyDateHTML = document.getElementsByClassName('js-currencydetail-date')[0];
-    let currencyAdaHTML = document.getElementsByClassName('currencydetail__datasheet-data')[0];    
+    let currencyAdaHTML = document.getElementsByClassName('currencydetail__datasheet-data')[0];
+    let currencyEurHTML = document.getElementsByClassName('currencydetail__datasheet-label')[0];
     currencyCodeHTML.innerHTML = code;
     currencyNameHTML.innerHTML = value;
     currencyDateHTML.value = dateValue;
-    currencyAdaHTML.innerHTML = adaValue;  
+    currencyAdaHTML.innerHTML = adaValue;
+    currencyEurHTML.innerHTML = "EUR";  
 }
 
 /* Define a class to clean the original html */
@@ -88,7 +90,7 @@ function increaselist ({ code, value }) {
         let clickValue = value;
         const clickDetails = new displayCurrencyDetails(clickValue);
         const details = await clickDetails.loadData(code);
-        updateDetails({code: details[1].code, value: details[1].code, dateValue: details[0].value, adaValue: details[1].value['ada']});
+        updateDetails({code: details[1].code, value: details[1].code, dateValue: details[0].value, adaValue: details[1].value['eur']});
         console.log(details);
     });
     newSpan2.append(newa1);
