@@ -15,9 +15,7 @@
     </head>
 
     <body>
-
         <div class="header">
-
             <h1 class="title">💶 Exchanges</h1>
             <div class="searchbox">
                 <div class="searchbox__content">
@@ -27,14 +25,12 @@
                 </div>
                 <p class="searchbox__feedback js-search-feedback">&nbsp;</p>
             </div>
-
-            <a class="link link--favs js-favs" href="#">
+            <a id="js-favs"  class="link link--favs js-favs" href="#">
                 <span class="icon link__icon">
                     <img src="img/ico-favs-outline.svg" alt="View favs">
                 </span>
                 <span class="link__label">Favs</span>
             </a>
-
         </div>
 
         <article class="results">
@@ -43,13 +39,11 @@
             </header>
             <div class="results__content">
                 <ul class="currencylist">
-
                     <li class="currencylist__item currencylist__item--header">
                         <span class="currencylist__item-code">Code</span>
                         <span class="currencylist__item-name">Name</span>
                         <span class="currencylist__item-actions">&nbsp;</span>
                     </li>
-
                     <li class="currencylist__item" data-code="ADA">
                         <span class="currencylist__item-code">ADA</span>
                         <span class="currencylist__item-name">
@@ -63,7 +57,6 @@
                             </a>
                         </span>
                     </li>
-
                     <li id = "item" class="currencylist__item" data-code="EUR">
                         <span class="currencylist__item-code">EUR</span>
                         <span class="currencylist__item-name">
@@ -77,7 +70,6 @@
                             </a>
                         </span>
                     </li>
-
                     <li id = "item" class="currencylist__item" data-code="USD">
                         <span class="currencylist__item-code">USD</span>
                         <span class="currencylist__item-name">
@@ -91,12 +83,8 @@
                             </a>
                         </span>
                     </li>
-
-
-
                 </ul>
             </div>
-
         </article>
 
         <article id="currencydetail" class="currencydetail">
@@ -123,18 +111,87 @@
 
                 <div class="currencydetail__filter">
                     <h2 class="currencydetail__subtitle">Exchange List</h3>
-                    <input class="field js-currencydetail-date" type="date" value="2022-04-21">
+                    <input id="js-currencydetail-date" class="field js-currencydetail-date" type="date" value="2022-04-21">
                 </div>
             </header>
-
             <section class="currencydetail__datasheet js-currencydetail-list">
                 <div class="currencydetail__datasheet-row">
                     <h3 class="currencydetail__datasheet-label">ADA</h3>
                     <p class="currencydetail__datasheet-data">1.24444</p>
                 </div>
             </section>
-
         </article>
+        
+        <article class="favs">
+            <header class="currencydetail__header">
+                <h2  class="results-title">Your favourites below</h2>
+                <div class="currencydetail__header-actions">
+                    <a href="javascript:void(0);"  class="currencydetail__close js-currencydetail-close">
+                        <span class="link__label">Close</span>
+                        <span class="icon link__icon">
+                            <img src="img/ico-close-outline.svg" alt="Close detail">
+                        </span>
+                    </a>
+                    <a href="#" class="currencydetail__addfav link js-currencydetail-fav" data-imdb="">
+                        <span class="icon link__icon">
+                            <img class="js-currencydetail-fav-icon" src="img/ico-fav-outline.svg" alt="Add to favs">
+                        </span>
+                        <span class="link__label js-currencydetail-fav-label">Add to favs</span>
+                    </a>
+                </div>
+            </header>
+            <div class="results__content">
+                <ul class="currencylist">
+                    <li class="currencylist__item currencylist__item--header">
+                        <span class="currencylist__item-code">Code</span>
+                        <span class="currencylist__item-name">Name</span>
+                        <span class="currencylist__item-actions">&nbsp;</span>
+                    </li>
+                    <li class="currencylist__item" data-code="ADA">
+                        <span class="currencylist__item-code">ADA</span>
+                        <span class="currencylist__item-name">
+                            <a href="#" class="link">Cardano</a>
+                        </span>
+                        <span class="currencylist__item-actions">
+                            <a class="link js-item-fav" href="#" data-code="ADA">
+                                <span class="icon link__icon">
+                                    <img src="img/ico-fav-outline.svg" alt="Add to favs">
+                                </span>
+                            </a>
+                        </span>
+                    </li>
+                    <li id = "item" class="currencylist__item" data-code="EUR">
+                        <span class="currencylist__item-code">EUR</span>
+                        <span class="currencylist__item-name">
+                            <a href="#" class="link">Euro</a>
+                        </span>
+                        <span class="currencylist__item-actions">
+                            <a class="link js-item-fav" href="#" data-code="EUR">
+                                <span class="icon link__icon">
+                                    <img src="img/ico-fav-outline.svg" alt="Add to favs">
+                                </span>
+                            </a>
+                        </span>
+                    </li>
+                    <li id = "item" class="currencylist__item" data-code="USD">
+                        <span class="currencylist__item-code">USD</span>
+                        <span class="currencylist__item-name">
+                            <a href="#" class="link">United States Dollar</a>
+                        </span>
+                        <span class="currencylist__item-actions">
+                            <a class="link js-item-fav" href="#" data-code="USD">
+                                <span class="icon link__icon">
+                                    <img src="img/ico-fav-outline.svg" alt="Add to favs">
+                                </span>
+                            </a>
+                        </span>
+                    </li>
+                </ul>
+            </div>
+        </article>
+
+
+
 
         <script type="module" src="js/main.js"></script>
     </body>

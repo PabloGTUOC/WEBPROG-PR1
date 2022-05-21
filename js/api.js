@@ -1,5 +1,5 @@
 
-export { displayCurrencyList as displayCurrencyList, displayCurrencyDetails as displayCurrencyDetails };
+export { displayCurrencyList as displayCurrencyList, displayCurrencyDetails as displayCurrencyDetails, displayCurrencyDetailsDate as displayCurrencyDetailsDate };
 
 // Information to reach API & obtain currency list
 // Asynchronous function
@@ -35,6 +35,32 @@ class displayCurrencyDetails {
       transformCode = code.split(' ')?.[1];
     }
     url = `${url}/${transformCode}.json`;
+    console.log(url);
+    let response = await fetch(url);
+    if (response.ok){
+      const jsonResponse =  await response.json();
+      let data = [];
+      Object.keys(jsonResponse).forEach(key => {
+        data.push({'code': key, 'value': jsonResponse[key]});
+      })
+      return data;
+    }
+  }
+};
+
+class displayCurrencyDetailsDate {
+  currencieDetails = [];
+  constructor(code, dateValue) {
+    this.code = code;
+    this.dateValue = dateValue;
+  }
+  loadData = async function (code, dateValue) {
+    let url = 'https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1';
+    let transformCode = code.toLowerCase();
+    if (code.indexOf(' ') >= 0) {
+      transformCode = code.split(' ')?.[1];
+    }
+    url = `${url}/${dateValue}/currencies/${transformCode}.json`;
     console.log(url);
     let response = await fetch(url);
     if (response.ok){

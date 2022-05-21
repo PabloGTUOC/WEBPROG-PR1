@@ -90,7 +90,18 @@ const  addOncloseClickevent = () => {
   });
 };
 
+const  addOnshowFavs = () => {
+    console.log('Show Favs');
+    let favsLink = document.getElementById('js-favs');
+    favsLink.addEventListener('click', function(){
+        const favssection = document.getElementsByClassName('favs')[0];
+        favssection.style.transform = "translateX(0%)";
+  });
+};
+
 addOncloseClickevent();
+addOnshowFavs ();
+
 
 /*Call the API for details on the clicked code */
 //const currencieDetails = await initDetails(clickDetails);
