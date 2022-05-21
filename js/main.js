@@ -105,10 +105,22 @@ const  addOncloseClickeventFavs = () => {
   });
 };
 
+const  addtoFavs = () => {
+    let addFavs = document.getElementsByClassName('js-currencydetail-fav-label')[0];
+    addFavs.addEventListener('click', function(){
+        let item = document.getElementsByClassName('js-currencydetail-name')[0].textContent;
+        console.log(item);
+        favs.push(item);
+        console.log(favs);
+        return favs;
+  });
+};
+
 addOnshowFavs ();
 addOncloseClickeventDetails();
 addOncloseClickeventFavs ();
-
+addtoFavs();
+favs = addtoFavs.favs;
 
 
 /*Call the API for details on the clicked code */
