@@ -120,7 +120,6 @@ addOnshowFavs ();
 addOncloseClickeventDetails();
 addOncloseClickeventFavs ();
 addtoFavs();
-favs = addtoFavs.favs;
 
 
 /*Call the API for details on the clicked code */
