@@ -20,14 +20,10 @@ function updateDetails ({code, value, dateValue, adaValue}) {
     let currencyNameHTML = document.getElementsByClassName('js-currencydetail-name')[0];
     let currencyDateHTML = document.getElementsByClassName('js-currencydetail-date')[0];
     let currencyAdaHTML = document.getElementsByClassName('currencydetail__datasheet-data')[0];    
-
     currencyCodeHTML.innerHTML = code;
     currencyNameHTML.innerHTML = value;
     currencyDateHTML.value = dateValue;
-    currencyAdaHTML.innerHTML = adaValue;
-
-
-    
+    currencyAdaHTML.innerHTML = adaValue;  
 }
 
 /* Define a class to clean the original html */
@@ -80,12 +76,8 @@ function increaselist ({ code, value }) {
     newSpan1.className = "currencylist__item-code";
     newSpan1.append(code);
     newLi.append(newSpan1);
-
-
-
     const newSpan2 = document.createElement("span");
     newSpan2.className = "currencylist__item-name";
-    
     const newa1 = document.createElement("a");
     newa1.className = "link";
     newa1.append(value);
@@ -96,9 +88,8 @@ function increaselist ({ code, value }) {
         let clickValue = value;
         const clickDetails = new displayCurrencyDetails(clickValue);
         const details = await clickDetails.loadData(code);
-            updateDetails({code: details[1].code, value: details[1].code, dateValue: details[0].value, adaValue: details[1].value['ada']});
+        updateDetails({code: details[1].code, value: details[1].code, dateValue: details[0].value, adaValue: details[1].value['ada']});
         console.log(details);
-
     });
     newSpan2.append(newa1);
     newLi.append(newSpan2);

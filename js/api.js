@@ -27,9 +27,7 @@ class displayCurrencyDetails {
   currencieDetails = [];
   constructor(code) {
     this.code = code;
-
   }
-
   loadData = async function (code) {
     let url = 'https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/';
     let transformCode = code.toLowerCase();;
@@ -37,7 +35,6 @@ class displayCurrencyDetails {
       transformCode = code.split(' ')?.[1];
     }
     url = `${url}/${transformCode}.json`;
-
     console.log(url);
     let response = await fetch(url);
     if (response.ok){
@@ -49,6 +46,4 @@ class displayCurrencyDetails {
       return data;
     }
   }
-
-   
 };
