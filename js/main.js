@@ -121,6 +121,13 @@ const addtoFavs = () => {
     addFavs.addEventListener('click', function () {
         let item = document.getElementsByClassName('js-currencydetail-name')[0].textContent;
         favs.push(item);
+        const alert = document.createElement('alert');
+        alert.style.className = 'alert-favs';
+        alert.innerHTML = 'Added to favs';
+        alert.addEventListener('click', function () {
+            alert.parentNode.removeChild(alert);
+        });
+        document.body.insertBefore(alert, document.body.firstChild);
     });
 };
 
