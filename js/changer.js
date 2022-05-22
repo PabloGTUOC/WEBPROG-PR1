@@ -39,7 +39,8 @@ function updateDetailsDate ({code, value, newDate, adaValue}) {
     currencyNameHTML.innerHTML = value;
     currencyDateHTML.value = newDate;
     currencyAdaHTML.innerHTML = adaValue;
-    currencyEurHTML.innerHTML = "EUR";  
+    currencyEurHTML.innerHTML = adaValue;
+    ;  
 }
 
 /* Define a class to clean the original html */
@@ -103,7 +104,11 @@ function increaselist ({ code, value }) {
         let dateValue = clickDate.value;
         const clickDetails = new displayCurrencyDetailsDate(clickValue, dateValue);
         const details = await clickDetails.loadData(code, dateValue);
-        updateDetails({code: details[1].code, value: details[1].code, dateValue: details[0].value, adaValue: details[1].value['eur']});
+        console.log(details);
+        console.log(details[1].value);
+        details.forEach(element => {
+            updateDetails({code: details[1].code, value: details[1].code, dateValue: details[0].value, adaValue: details[1].value['eur']});
+        });
         console.log(details);
         clickDate.addEventListener('click',async function(){
             let newDate = clickDate.value;
