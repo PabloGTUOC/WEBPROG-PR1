@@ -8,6 +8,12 @@ console.log('Your code starts here 🙂');
 *
 */
 
+/* DISCLAIMER:
+I was not capable to fully udnerstand point 1 & 2 above so I took several pieces of stack overflow codes to find something that somehow works. 
+I do know is not the full assigment but I also got covid inbetween and thereby the best I could do in the time. I have seen many comments around cookies but I am neither understanding how to properly set those up.
+*
+*/
+
 /* General variable to introduce results domain */
 
 let resultdomin = document.querySelector('.results');
@@ -33,7 +39,7 @@ async function initDetails() {
 // Activation of the Api call to dowload the currency list
 const currencies = await initlist();
 let currencyValues = Object.values(currencies);
-console.log(currencyValues);
+
 
 /*Once list is load, allow for search on the main site and update title of results */
 var searchInput = document.getElementById("search");
@@ -46,9 +52,6 @@ let lookValue = searchInput.addEventListener('keyup', function () {
     var app = new cleanUpLoad(resultdomin);
     //Add new list
     var newList = new loadList(app.listDom);
-    /*filtercurrencies.forEach(element => {
-        app.listDom.getElementsByClassName('currencylist')[0].append(increaselist(element));
-    });*/
     filtercurrencies?.forEach(element => {
         app.listDom.getElementsByClassName('currencylist')[0].append(increaselist(element));
     });
@@ -88,17 +91,14 @@ const addOncloseClickeventDetails = () => {
         unhidesection.style.transform = "translateX(100%)";
     });
 };
-// Shows favs and make results invisible, but results still taking space in the web.
+// Shows favs and make results invisible, but only as display notice.
 const addOnshowFavs = () => {
     //Cleaning previous favs
     const modalClose = document.getElementsByClassName('modal-button')[0];
-
     modalClose.addEventListener('click', function () {
         let modal = document.getElementById('modal');
         modal.close();
     });
-
-    console.log('Show Favs');
     let favsLink = document.getElementById('js-favs');
     favsLink.addEventListener('click', function () {
         const listElements = document.getElementsByClassName('modal_currencylist__item');
@@ -115,7 +115,7 @@ const addOnshowFavs = () => {
     });
 };
 
-// Add the selected currency to favs but the variable is not being returned to the main.js
+// Add the selected currency to favs but not sure how to export to cookies
 const addtoFavs = () => {
     let addFavs = document.getElementsByClassName('js-currencydetail-fav-label')[0];
     addFavs.addEventListener('click', function () {
@@ -131,6 +131,19 @@ const addtoFavs = () => {
     });
 };
 
+// Trying to export and read cookies
+function setCookie(favs) {
+    document.cookie = favs;
+    var cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)list\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+    return cookieValue;
+}
+
+function readCookie(cookieValue) {
+    favs.append(cookieValue.split(","));
+}
+
 addOnshowFavs();
 addOncloseClickeventDetails();
 addtoFavs();
+setCookie ();
+readCookie();

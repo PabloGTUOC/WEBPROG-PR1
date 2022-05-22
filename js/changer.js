@@ -112,7 +112,7 @@ class loadList {
     }
 }
 
-/* Function to create a new item li block per currency, but I am not capable to loop the whole list */
+/* Function to create a new item li block per currency, but when selecting list something goes wrong with the date selector */
 function increaselist({ code, value }) {
     const newLi = document.createElement("li");
     newLi.className = "currencylist__item";
@@ -126,7 +126,6 @@ function increaselist({ code, value }) {
     newa1.className = "link";
     newa1.append(value);
     newa1.addEventListener('click', async function () {
-        console.log('idiot');
         let unhidesection = document.getElementById("currencydetail");
         unhidesection.style.transform = "translateX(0)";
         let clickValue = value;
@@ -137,15 +136,14 @@ function increaselist({ code, value }) {
         details?.forEach(elements => {
             updateDetails({ code: details[1].code, value: details[1].code, dateValue: details[0].value, currencyValueList: details[1].value });
         });
-        console.log(details);
-        // clickDate.addEventListener('click', async function () {
-        //     let newDate = clickDate.value;
-        //     console.log(newDate);
-        //     const clickDetails = new displayCurrencyDetailsDate(clickValue, newDate);
-        //     const details = await clickDetails.loadData(code, newDate);
-        //     updateDetails({ code: details[1].code, value: details[1].code, newDate: details[0].value, currencyValueList: details[1].value });
-        //     console.log(details);
-        // })
+        clickDate.addEventListener('click', async function () {
+             let newDate = clickDate.value;
+             const clickDetails = new displayCurrencyDetailsDate(clickValue, newDate);
+             const details = await clickDetails.loadData(code, newDate);
+             details?.forEach(elements => {
+                updateDetails({ code: details[1].code, value: details[1].code, newDate: details[0].value, currencyValueList: details[1].value });
+            });
+         })
     });
     newSpan2.append(newa1);
     newLi.append(newSpan2);
