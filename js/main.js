@@ -41,7 +41,7 @@ const currencies = await initlist();
 let currencyValues = Object.values(currencies);
 
 
-/*Once list is load, allow for search on the main site and update title of results */
+/*Once list is load, allow for search on the main site and update title of results, but I am only displaying after input */
 var searchInput = document.getElementById("search");
 let lookValue = searchInput.addEventListener('keyup', function () {
     let mainResult = document.getElementsByClassName('results')[0];
@@ -64,7 +64,7 @@ let lookValue = searchInput.addEventListener('keyup', function () {
     }
 });
 
-//query along full list of currencies
+//Query along full list of currencies in the background
 function extractCurrenciesFromSearch(query) {
     if (query.length > 2) {
         return currencies.filter(currency => {
@@ -133,17 +133,16 @@ const addtoFavs = () => {
 
 // Trying to export and read cookies
 function setCookie(favs) {
-    document.cookie = favs;
+    document.cookie = favs; "path=/";
     var cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)list\s*\=\s*([^;]*).*$)|^.*$/, "$1");
     return cookieValue;
 }
-
 function readCookie(cookieValue) {
-    favs.append(cookieValue.split(","));
+    favs.push(cookieValue.split(","));
 }
 
 addOnshowFavs();
 addOncloseClickeventDetails();
 addtoFavs();
-setCookie ();
-readCookie();
+let cookieValue = setCookie (favs);
+readCookie(cookieValue);
