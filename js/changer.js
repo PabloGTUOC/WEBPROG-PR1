@@ -39,7 +39,7 @@ function updateDetailsDate ({code, value, newDate, adaValue}) {
     currencyNameHTML.innerHTML = value;
     currencyDateHTML.value = newDate;
     currencyAdaHTML.innerHTML = adaValue;
-    currencyEurHTML.innerHTML = adaValue;
+    currencyEurHTML.innerHTML = "EUR";  
     ;  
 }
 
@@ -82,7 +82,7 @@ class loadList {
     }
 }
 
-/* Function to create a new item li block per currency */
+/* Function to create a new item li block per currency, but I am not capable to loop the whole list */
 function increaselist ({ code, value }) {
     const newLi = document.createElement("li");
     newLi.className = "currencylist__item";
@@ -104,9 +104,7 @@ function increaselist ({ code, value }) {
         let dateValue = clickDate.value;
         const clickDetails = new displayCurrencyDetailsDate(clickValue, dateValue);
         const details = await clickDetails.loadData(code, dateValue);
-        console.log(details);
-        console.log(details[1].value);
-        details.forEach(element => {
+        details?.forEach(elements => {
             updateDetails({code: details[1].code, value: details[1].code, dateValue: details[0].value, adaValue: details[1].value['eur']});
         });
         console.log(details);

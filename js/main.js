@@ -12,6 +12,7 @@ console.log('Your code starts here 🙂');
 
 let resultdomin = document.querySelector('.results');
 let removetitle = document.getElementsByClassName('results-title');
+
 //On load of page, clean to start search
 import { displayCurrencyList, displayCurrencyDetails } from './api.js';
 import { cleanUpLoad, loadList, increaselist, updateTitle, unHideDetails } from './changer.js';
@@ -24,12 +25,12 @@ async function initlist() {
     let list = new displayCurrencyList();
     return list.currencies;
 };
-
+// Api call to dowload the currency details
 async function initDetails() {
     let details = new displayCurrencyDetails();
     return details.currencieDetails;
 };
-
+// Activation of the Api call to dowload the currency list
 const currencies = await initlist();
 let currencyValues = Object.values(currencies);
 console.log(currencyValues);
@@ -37,7 +38,9 @@ console.log(currencyValues);
 /*Once list is load, allow for search on the main site and update title of results */
 var searchInput = document.getElementById("search");
 let lookValue = searchInput.addEventListener('keyup', function(){
-  var search = this.value;
+    let mainResult = document.getElementsByClassName('results')[0];
+    mainResult.style.visibility = 'visible';
+    var search = this.value;
     const filtercurrencies = extractCurrenciesFromSearch(search);
     // Clear the list
     var app = new cleanUpLoad(resultdomin);
@@ -59,8 +62,7 @@ let lookValue = searchInput.addEventListener('keyup', function(){
     return eachList
 });
 
-console.log(lookValue);
-
+//query along full list of currencies
 function extractCurrenciesFromSearch(query){
     if (query.length > 2) {
         return currencies.filter(currency => {
@@ -79,7 +81,7 @@ cleanSearch.addEventListener('click', function(){
       searchInput.value = "";
 });
 
-
+//Close results after detail click
 const  addOncloseClickeventDetails = () => {
     let closeLink = document.getElementsByClassName('js-currencydetail-close')[0];
     closeLink.addEventListener('click', function(){
@@ -87,24 +89,21 @@ const  addOncloseClickeventDetails = () => {
         unhidesection.style.transform = "translateX(100%)";
   });
 };
-
+// Shows favs and make results invisible, but results still taking space in the web.
 const  addOnshowFavs = () => {
     console.log('Show Favs');
     let favsLink = document.getElementById('js-favs');
     favsLink.addEventListener('click', function(){
-        const favssection = document.getElementsByClassName('favs')[0];
-        favssection.style.transform = "translateX(0%)";
+        let favssection = document.getElementById('favs');
+        favssection.style.visibility = 'visible';
+        console.log(favssection.style.display);
+        let mainResult = document.getElementsByClassName('results')[0];
+        mainResult.style.visibility = 'hidden';
+        mainResult.style.transform = "translateX(0%)";
   });
 };
 
-const  addOncloseClickeventFavs = () => {
-    let closeLinkfavs = document.getElementsByClassName('js-favs-close')[0];
-    closeLinkfavs.addEventListener('click', function(){
-        const favssection = document.getElementsByClassName('favs')[0];
-        favssection.style.transform = "translateX(100%)";
-  });
-};
-
+// Add the selected currency to favs but the variable is not being returned to the main.js
 const  addtoFavs = () => {
     let addFavs = document.getElementsByClassName('js-currencydetail-fav-label')[0];
     addFavs.addEventListener('click', function(){
@@ -118,13 +117,4 @@ const  addtoFavs = () => {
 
 addOnshowFavs ();
 addOncloseClickeventDetails();
-addOncloseClickeventFavs ();
 addtoFavs();
-
-
-/*Call the API for details on the clicked code */
-//const currencieDetails = await initDetails(clickDetails);
-
-// if (currencieDetails) {
-//     let showDetails = new unHideDetails(resultdomin);
-// };
