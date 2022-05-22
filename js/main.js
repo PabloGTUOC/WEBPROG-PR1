@@ -93,7 +93,7 @@ const addOncloseClickeventDetails = () => {
 };
 // Shows favs and make results invisible, but only as display notice.
 const addOnshowFavs = () => {
-    //Cleaning previous favs
+    //Closing previous favs
     const modalClose = document.getElementsByClassName('modal-button')[0];
     modalClose.addEventListener('click', function () {
         let modal = document.getElementById('modal');
