@@ -2,6 +2,66 @@
 
 export { cleanUpLoad, loadList };
 
+let resultdomin = document.querySelector('.results');
+
+/* Define a function to clean the original title */
+function updateTitle(removetitle, newText) {
+    Array.from(removetitle).forEach(item => item.remove());
+    let newTitle = document.createElement("H2");
+    newTitle.classList.add('results-title');
+    newTitle.innerHTML = newText;
+    return newTitle;
+}
+/* Define a function to update favs list*/
+function updateDetailsModal(code) {
+    let modal = document.getElementsByClassName('modal_currencylist')[0];
+    let newLi = document.createElement("li");
+    newLi.className = "modal_currencylist__item currencylist__item";
+    let newCode = document.createElement('span');
+    newCode.className = 'modal_currencylist__item-code currencylist__item-code';
+    newCode.innerHTML = code;
+    let newValue = document.createElement('span');
+    newValue.className = 'modal_currencylist__item-name currencylist__item-name';
+    newValue.innerHTML = code;
+    let newAction = document.createElement('span');
+    newAction.className = 'modal_currencylist__item-actions currencylist__item-actions';
+    newAction.innerHTML = 'Remove';
+    newLi.appendChild(newCode);
+    newLi.appendChild(newValue);
+    newLi.appendChild(newAction);
+    modal.appendChild(newLi);
+}
+
+/* Define a function to update details of a detailed currency search, first entry */
+function updateDetails({ code, value, dateValue, currencyValueList }) {
+    let currencyCodeHTML = document.getElementsByClassName('js-currencydetail-code')[0];
+    let currencyNameHTML = document.getElementsByClassName('js-currencydetail-name')[0];
+    let currencyDateHTML = document.getElementsByClassName('js-currencydetail-date')[0];
+    currencyCodeHTML.innerHTML = code;
+    currencyNameHTML.innerHTML = value;
+    currencyDateHTML.value = dateValue;
+
+
+    let listContainer = document.getElementsByClassName('js-currencydetail-list')[0];
+
+    listContainer.innerHTML = '';
+
+    Object.keys(currencyValueList).forEach(function (key) {
+        let newRow = document.createElement("div");
+        newRow.className = "currencydetail__datasheet-row";
+        let newTitle = document.createElement('h3');
+        newTitle.className = 'currencydetail__datasheet-label';
+        newTitle.innerHTML = key;
+        let newValue = document.createElement('p');
+        newValue.className = 'currencydetail__datasheet-data';
+        newValue.innerHTML = currencyValueList[key];
+        newRow.appendChild(newTitle);
+        newRow.appendChild(newValue);
+        listContainer.appendChild(newRow);
+    });
+}
+
+/* Define a class to clean the original html */
 class cleanUpLoad {
     constructor(ref) {
         this.listDom = ref;
@@ -52,8 +112,8 @@ class loadList {
     }
 }
 
-
-function increaselist (list) {
+/* Function to create a new item li block per currency, also updates date but after click date is gone in the date field I do not know why */
+function increaselist({ code, value }) {
     const newLi = document.createElement("li");
     newLi.className = "currencylist__item";
     const newSpan1 = document.createElement("span");
@@ -64,7 +124,31 @@ function increaselist (list) {
     newSpan2.className = "currencylist__item-name";
     const newa1 = document.createElement("a");
     newa1.className = "link";
-    newa1.append(list[1]);
+    newa1.append(value);
+    newa1.addEventListener('click', async function () {
+        console.log('idiot');
+        let unhidesection = document.getElementById("currencydetail");
+        unhidesection.style.transform = "translateX(0)";
+        let clickValue = value;
+        let clickDate = document.getElementById("js-currencydetail-date");
+        let dateValue = clickDate.value;
+        const clickDetails = new displayCurrencyDetailsDate(clickValue, dateValue);
+        const details = await clickDetails.loadData(code, dateValue);
+        details?.forEach(elements => {
+            updateDetails({ code: details[1].code, value: details[1].code, dateValue: details[0].value, currencyValueList: details[1].value });
+        });
+        console.log(details);
+        clickDate.addEventListener('click', async function () {
+             let newDate = clickDate.value;
+             console.log(newDate);
+             const clickDetails = new displayCurrencyDetailsDate(clickValue, newDate);
+             const details = await clickDetails.loadData(code, newDate);
+             details?.forEach(elements => {
+                updateDetails({ code: details[1].code, value: details[1].code, newDate: details[0].value, currencyValueList: details[1].value });
+            });
+             console.log(details);
+         })
+    });
     newSpan2.append(newa1);
     newLi.append(newSpan2);
     const newSpan3 = document.createElement("span");
